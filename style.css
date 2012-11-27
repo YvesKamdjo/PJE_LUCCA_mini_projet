@@ -1,0 +1,63 @@
+*
+{
+	font-family: Verdana;
+}
+
+body {
+		margin-top: 80px;
+		margin-right: 40px;
+		margin-bottom: 10px;
+		margin-left: 70px;
+	}
+
+#im1
+{
+ position: absolute;
+ top: 20px;
+ right: 50%;
+}
+#sec1
+{
+ margin-bottom: 4px;
+ border-top:1px dotted grey;
+}
+#part1
+{
+ margin-bottom: 4px;
+ border-bottom:1px dotted grey;
+}
+
+#res1
+{
+border:0px;
+background-color: #9FC1DB;
+text-align:justify;
+}
+span.gch
+{
+ width:90%;
+ float:left;
+}
+span.drt
+{
+ width:10%;
+ float:rigth;
+}
+#tit1
+{
+text-decoration:underline;
+color:blue;
+}
+span.des1
+{
+color:grey;
+}
+span.des2
+{
+font-weight:bold;
+}
+#dat
+{
+color:green;
+font-style:italic;
+}

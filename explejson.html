@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Petit exemple de manipulation de JSON</h1>
+
+<p>
+QUI: <span id="qui1"></span><br>  
+ORGANISATEUR: <span id="orga1"></span><br> 
+QUAND:<span id="quand1"></span><br> 
+OU: <span id="ou1"></span><br> 
+Télephone: <span id="tel1"></span><br> 
+</p>  
+
+<script>
+var expJSON = {
+  "qui":"Guy DURAND",
+  "orga":"Guy DURAND", 
+  "quand":"01/06/2012",
+  "ou":"Paris",
+  "tel":"01 02 04 06 10"};
+document.getElementById("qui1").innerHTML=expJSON.qui 
+document.getElementById("orga1").innerHTML=expJSON.orga 
+document.getElementById("quand1").innerHTML=expJSON.quand  
+document.getElementById("ou1").innerHTML=expJSON.ou  
+document.getElementById("tel1").innerHTML=expJSON.tel 
+</script>
+
+</body>
+</html>
