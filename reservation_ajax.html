@@ -1,0 +1,59 @@
+<html>
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+ <head><link rel="stylesheet" href="style_json.css">
+       <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+       <title> Affichage des reservations </title>
+ </head>
+ <body>
+    <div id="image-recherche">
+	   <img src="recherche.png"></img>
+	</div>
+    <br>
+	<div align="center">
+	 Rechercher une reservation du <input type="text"> </input><input type="button" style="background-image:url(cal.png); width:36px"></input> au
+                            	   <input type="text"> </input> <input type="button" style="background-image:url(cal.png); width:36px"></input>
+	</div>
+	<br>
+	<div align="center" id="rechercher-reservation">
+	 <input type="text"> </input> <input type="button" style="background-color: #404AA4; color:white" font="white" value="Rechercher" > </input>
+	 <img src="imp.png" alt="Imprimer">
+	 <p>
+	 </p>
+	</div>	
+	<script type="text/javascript">
+	function reception(){
+	return $.ajax({
+	  "url":"bookings2.js", 
+	  "type":"GET",
+	  "dataType":"json",
+	  "success":function(d){
+	       var j=0;
+		   var expReg= new RegExp("(OTOT\(\')","g");
+	       var tab=d.replace(expReg,"");
+		  // tab=tab.split(
+		   var donnee=tab[j];
+	       while(tab[j]!='undefined'){
+	       var html=[];
+	       var i=0;
+		   html[i++]='<div id="une-reservation"></div>';
+		   html[i++]='<div id="resultat">Reservation du <span id="dateDebut"><b>'+donnee.startDate+'</b></span> au <span id="dateFin"><b>'+donnee.endDate+'</span></div>';
+		   html[i++]='<div><span id="reservation">Salle:<span id="salle">'+donnee.resource.displayName+'</span></div>' ;
+		   html[i++]='<div ><span id="reservation">Qui: </span> <span id="nom">'+donnee.fields[0].value+'</span></div>';
+		   html[i++]='<div><span id="reservation">Organisateur: </span> <span id="organisateur">'+donnee.fields[1].value+'</span></div>';
+		   html[i++]='<div><span id="reservation">Telephone: </span> <span id="telephone">'+donnee.fields[2].value +'</span></div>';
+		   html[i++]='<div><span id="reservation">Disposition: </span> <span id="disposition">'+donnee.fields[3].value+'</span></div>';
+		   html[i++]='<div><span id="reservation">Nb de participants: </span> <span id="nbre-participants">'+donnee.fields[4].value+'</span></div>';
+		   html[i++]='<div><span id="reservation">Entite: </span> <span id="entite">'+donnee.fields[5].value+'</span></div>';
+		   html[i++]='<div><span id="reservation">Type: </span> <span id="type">'+donnee.fields[7].value+'</span></div>';
+		   html[i++]='<div><span id="reservation">Commentaire: </span> <span id="commentaires">'+donnee.fields[8].value+'</span></div>';
+		   html[i++]='<div id="date">Date de la demande: <span id="dateDemande">'+donnee.date+'</span></div>';
+		   $("body").append(html);
+			}
+		   j++;
+	        donnee=tab[j];
+	  }});
+	  }
+	 reception();
+	</script>
+ </body>
+</html>
