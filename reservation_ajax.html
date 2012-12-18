@@ -20,20 +20,9 @@
 	 <p>
 	 </p>
 	</div>	
-	<script type="text/javascript">
-	function reception(){
-	return $.ajax({
-	  "url":"bookings2.js", 
-	  "type":"GET",
-	  "dataType":"json",
-	  "success":function(d){
-	       var j=0;
-		   var expReg= new RegExp("(OTOT\(\')","g");
-	       var tab=d.replace(expReg,"");
-		  // tab=tab.split(
-		   var donnee=tab[j];
-	       while(tab[j]!='undefined'){
-	       var html=[];
+	<script type="text/javascript">		
+          function afficheHTML(donnee){
+		    var html=[];
 	       var i=0;
 		   html[i++]='<div id="une-reservation"></div>';
 		   html[i++]='<div id="resultat">Reservation du <span id="dateDebut"><b>'+donnee.startDate+'</b></span> au <span id="dateFin"><b>'+donnee.endDate+'</span></div>';
@@ -48,12 +37,23 @@
 		   html[i++]='<div><span id="reservation">Commentaire: </span> <span id="commentaires">'+donnee.fields[8].value+'</span></div>';
 		   html[i++]='<div id="date">Date de la demande: <span id="dateDemande">'+donnee.date+'</span></div>';
 		   $("body").append(html);
-			}
+           }		  
+      	  function OTOT(fluxAPI){
+		   console.log(fluxAPI);//test
+	       var j=0;
+		   var data=fluxAPI[j];
+	       while(fluxAPI[j]!='undefined'){
+		    afficheHTML(data);
 		   j++;
-	        donnee=tab[j];
-	  }});
-	  }
-	 reception();
+	       data=fluxAPI[j];
+		   }
+		  }
+	  var objetAJAX= new XMLHttpRequest();
+	  objetAJAX.open('GET','js/bookings2.json',false);//ouverture de la page contenant le flux de l'API
+	  objetAJAX.send(null);
+	   //document.write((objetAJAX.responseText));//ça marche bien, mais je n'arrive pas à l'exécuter avec eval()
+	  eval(objetAJAX.responseText);//normalement objetAJAX.responseText=OTOT('[....]');
+	  //eval('\''+objetAJAX.responseText+'\'');
 	</script>
  </body>
 </html>
