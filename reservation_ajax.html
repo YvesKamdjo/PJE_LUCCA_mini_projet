@@ -2,7 +2,7 @@
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
  <head><link rel="stylesheet" href="style_json.css">
        <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
-       <title> Affichage des reservations </title>
+       <title> Affichage des reservations  </title>
  </head>
  <body>
     <div id="image-recherche">
@@ -20,13 +20,19 @@
 	 <p>
 	 </p>
 	</div>	
-	<script type="text/javascript">		
-          function afficheHTML(donnee){
-		    var html=[];
+	<script type="text/javascript" >		  
+      function OTOT(data){
+		  //console.log(fluxAPI);//test
+	       var j=0;
+		   var fluxAPI=eval(data);
+		   console.log(fluxAPI);
+	       while(fluxAPI[j]!='undefined'){
+		   var html=[];
+		   var donnee=fluxAPI[j];
 	       var i=0;
 		   html[i++]='<div id="une-reservation"></div>';
-		   html[i++]='<div id="resultat">Reservation du <span id="dateDebut"><b>'+donnee.startDate+'</b></span> au <span id="dateFin"><b>'+donnee.endDate+'</span></div>';
-		   html[i++]='<div><span id="reservation">Salle:<span id="salle">'+donnee.resource.displayName+'</span></div>' ;
+		   html[i++]='<div id="resultat">Reservation du <span id="dateDebut"><b>'+ donnee.startDate +'</b></span> au <span id="dateFin"><b>'+donnee.endDate+'</span></div>';
+		   html[i++]='<div><span id="reservation">Salle:<span id="salle">'+donnee.id+'</span></div>' ;
 		   html[i++]='<div ><span id="reservation">Qui: </span> <span id="nom">'+donnee.fields[0].value+'</span></div>';
 		   html[i++]='<div><span id="reservation">Organisateur: </span> <span id="organisateur">'+donnee.fields[1].value+'</span></div>';
 		   html[i++]='<div><span id="reservation">Telephone: </span> <span id="telephone">'+donnee.fields[2].value +'</span></div>';
@@ -35,25 +41,19 @@
 		   html[i++]='<div><span id="reservation">Entite: </span> <span id="entite">'+donnee.fields[5].value+'</span></div>';
 		   html[i++]='<div><span id="reservation">Type: </span> <span id="type">'+donnee.fields[7].value+'</span></div>';
 		   html[i++]='<div><span id="reservation">Commentaire: </span> <span id="commentaires">'+donnee.fields[8].value+'</span></div>';
-		   html[i++]='<div id="date">Date de la demande: <span id="dateDemande">'+donnee.date+'</span></div>';
+		   html[i++]='<div id="date">Date de la demande: <span id="dateDemande">'+donnee.date+'</span></div>'; 
 		   $("body").append(html);
-           }		  
-      	  function OTOT(fluxAPI){
-		   console.log(fluxAPI);//test
-	       var j=0;
-		   var data=fluxAPI[j];
-	       while(fluxAPI[j]!='undefined'){
-		    afficheHTML(data);
 		   j++;
-	       data=fluxAPI[j];
 		   }
-		  }
-	  var objetAJAX= new XMLHttpRequest();
-	  objetAJAX.open('GET','js/bookings2.json',false);//ouverture de la page contenant le flux de l'API
-	  objetAJAX.send(null);
-	   //document.write((objetAJAX.responseText));//ça marche bien, mais je n'arrive pas à l'exécuter avec eval()
-	  eval(objetAJAX.responseText);//normalement objetAJAX.responseText=OTOT('[....]');
-	  //eval('\''+objetAJAX.responseText+'\'');
+		  }	
+	    var objetAJAX= new XMLHttpRequest();
+	    var fonctionOTOT;
+	    var par;
+	    objetAJAX.open('GET','js/bookings2.json',false);//ouverture de la page contenant le flux de l'API
+	    objetAJAX.send(null);
+	    fonctionOTOT=objetAJAX.responseText;
+	    //console.log(fonctionOTOT);//ça marche bien, mais je n'arrive pas à l'exécuter avec eval()
+	    eval(fonctionOTOT);
 	</script>
  </body>
 </html>
